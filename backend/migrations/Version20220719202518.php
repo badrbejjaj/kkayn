@@ -30,6 +30,7 @@ final class Version20220719202518 extends AbstractMigration
         $SuperAdminUser = [
             'id' => 1,
             'username' => 'superAdmin',
+            'gender' => 'm',
             'password' => $encoder->hash('azeaze', null),
             'email' => 'superadmin@mycoach.com',
             'roles' => "a:1:{i:0;s:9:\"SUPER_ADMIN_ROLE\";}",
@@ -37,8 +38,8 @@ final class Version20220719202518 extends AbstractMigration
             'date' => date("Y-m-d h:m:s"),
         ];
 
-        $this->addSql('INSERT INTO `user` (`id`, `user_created`, `user_updated`, `first_name`, `last_name`, `username`, `password`, `email`, `creation_date`, `update_date`, `roles`) 
-        VALUES (:id, :user, :user, :username, :username, :username, :password, :email, :date, :date, roles ) ', $SuperAdminUser);
+        $this->addSql('INSERT INTO `user` (`id`, `user_created`, `user_updated`, `first_name`, `last_name`, `username`,`gender`, `password`, `email`, `creation_date`, `update_date`, `roles`) 
+        VALUES (:id, :user, :user, :username, :username, :username,:gender, :password, :email, :date, :date, roles ) ', $SuperAdminUser);
         
 
     }
