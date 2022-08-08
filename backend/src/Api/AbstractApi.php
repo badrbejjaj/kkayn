@@ -234,7 +234,8 @@ abstract class AbstractApi
             return new ApiResponse(["message" => "Cet élément n'existe pas."]);
         }
 
-        $this->entityManager->remove($item);
+        $item->setLogSupp(true);
+        $this->entityManager->persist($item);
         $this->entityManager->flush();
 
         return new ApiResponse(["message" => "Élément supprimé."]);

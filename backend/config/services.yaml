@@ -40,3 +40,8 @@ services:
         class: App\Api\UserApi
         tags:
             - { name: "kkayn_api.api", api: "user" }
+
+    app.api.article:
+        class: App\Api\ArticleApi
+        tags:
+            - { name: "kkayn_api.api", api: "article" }
