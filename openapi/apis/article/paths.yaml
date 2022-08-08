@@ -1,0 +1,132 @@
+/articles:
+  post:
+    tags:
+    - 'article'
+    summary: 'Retourne une liste des articles'
+    description: ''
+    operationId: 'list'
+    security:
+      - oAuth:
+        - "article:read"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Filters'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListArticleResponse'
+
+/article/{id}:
+  get:
+    tags:
+    - 'article'
+    summary: 'Retourne un article'
+    description: ''
+    operationId: 'getById'
+    security:
+      - oAuth:
+        - "article:read"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+      400:
+        description: 'Identifiant articles'
+      404:
+        description: 'article non trouvé'
+  put:
+    tags:
+    - 'article'
+    summary: 'Met à jour un article'
+    description: 'MaJ article'
+    operationId: 'update'
+    security:
+      - oAuth:
+        - "article:edit"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'id article à mettre à jour'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Article'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'article non trouvé'
+  delete:
+    tags:
+    - 'article'
+    summary: 'Supprime un article'
+    description: 'Suppression article'
+    operationId: 'delete'
+    security:
+      - oAuth:
+        - "article:delete"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'Id article à supprimer'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'article non trouvé'
+
+
+/article:
+  post:
+    tags:
+    - 'article'
+    summary: 'Ajouter un article'
+    description: ''
+    operationId: 'create'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Article'
+      required: true
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
