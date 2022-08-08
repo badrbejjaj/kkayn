@@ -1,0 +1,52 @@
+User:
+  type: object
+  required:
+  - id
+  properties:
+    id:
+      type: 'integer'
+    firstName:
+      type: 'string'
+    lastName:
+      type: 'string'
+    username:
+      type: 'string'
+    roles:
+      type: 'array'
+      items:
+        type: 'string'
+    creationDate:
+      type: 'string'
+    updateDate:
+      type: 'string'
+
+UserRegister:
+  type: object
+  required:
+    - firstName
+    - lastName
+    - password
+    - email
+  properties:
+    firstName:
+      type: 'string'
+    lastName:
+      type: 'string'
+    email:
+      type: 'string'
+    password:
+      type: 'string'
+
+ListUserResponse:
+  type: object
+  required:
+  - itemsCount
+  - items
+  properties:
+    itemsCount:
+      type: 'integer'
+      format: 'int64'
+    items:
+      type: 'array'
+      items:
+        $ref: '#/components/schemas/User'

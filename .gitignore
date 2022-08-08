@@ -1,0 +1,12 @@
+# Openapi tools
+/openapi-generator
+openapi.json
+.vscode
+
+#Api
+frontend/KkaynClientApi
+/backend/KkaynApi/
+
+###> lexik/jwt-authentication-bundle ###
+/backend/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

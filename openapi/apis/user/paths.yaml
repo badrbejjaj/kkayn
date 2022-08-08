@@ -1,0 +1,151 @@
+/users:
+  post:
+    tags:
+    - 'user'
+    summary: 'Retourne une liste des utilisateurs'
+    description: ''
+    operationId: 'list'
+    security:
+      - oAuth:
+        - "user:read"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Filters'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListUserResponse'
+
+/user/{id}:
+  get:
+    tags:
+    - 'user'
+    summary: 'Retourne un utilisteur'
+    description: ''
+    operationId: 'getById'
+    security:
+      - oAuth:
+        - "user:read"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      400:
+        description: 'Identifiant utilisateur'
+      404:
+        description: 'utilisateur non trouvé'
+  put:
+    tags:
+    - 'user'
+    summary: 'Met à jour un utilisateur'
+    description: 'MaJ utilisateur'
+    operationId: 'update'
+    security:
+      - oAuth:
+        - "user:edit"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'id utilisateur à mettre à jour'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'utilisateur non trouvé'
+  delete:
+    tags:
+    - 'user'
+    summary: 'Supprime une utilisateur'
+    description: 'Suppression utilisateur'
+    operationId: 'delete'
+    security:
+      - oAuth:
+        - "user:delete"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'Id utilisateur à supprimer'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'utilisateur non trouvé'
+
+/user/refresh_token:
+  post:
+    tags:
+    - 'user'
+    summary: "Refresh connected user token"
+    description: ''
+    operationId: 'refreshUserToken'
+    security:
+      - oAuth:
+        - "user:create"
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiTokenResponse'
+
+/signup:
+  post:
+    tags:
+    - 'user'
+    summary: 'Ajouter un utilisateur'
+    description: ''
+    operationId: 'create'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRegister'
+      required: true
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiTokenResponse'
+      422:
+        description: 'Username or email already exist'

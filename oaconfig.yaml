@@ -1,0 +1,10 @@
+backend:
+  language: "php-symfony"
+  config: "openapi/conf/api-symfony-config.json"
+  outputDir: "backend/KkaynApi"
+  templatesDir: "openapi/templates/symfony"
+frontend:
+  language: "typescript-angular"
+  config: "openapi/conf/api-angular-config.json"
+  outputDir: "frontend/KkaynClientAPI"
+  templatesDir: "openapi/templates/angular"

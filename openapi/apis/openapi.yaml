@@ -1,0 +1,26 @@
+openapi: '3.0.0'
+info:
+  description: kkayn Web Services.
+  version: 0.0.1
+  title: Kkayn WS
+servers:
+- url: http://api.kkayn.local
+  description: Dev local
+- url: http://kkayn.nope.xyz
+  description: Production
+tags:
+  $ref: ./tags.gen.yaml
+paths:
+  $ref: ./paths.gen.yaml
+components:
+  schemas:
+    $ref: ./components.gen.yaml
+  securitySchemes:
+    oAuth:
+        type: oauth2
+        description: This Api uses OAuth 2 wth the password grant flow.
+        flows:
+          password:
+            tokenUrl: /login
+            scopes:
+              profile: test

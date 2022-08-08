@@ -1,0 +1,8 @@
+{
+  "npmName": "kkayn-api",
+  "npmVersion": "1.0",
+  "snapshot": "false",
+  "providedInRoot": "true",
+  "ngVersion": "11.0.0",
+  "supportsES6": "true"
+}

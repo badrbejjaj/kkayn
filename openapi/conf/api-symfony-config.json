@@ -1,0 +1,13 @@
+{
+  "srcBasePath": "KkaynServerApi",
+  "apiPackage": "Api",
+  "modelPackage": "Models",
+  "invokerPackage": "KkaynApi",
+  "bundleName": "KkaynApi",
+  "bundleAlias": "kkayn_api",
+  "composerVendorName": "kkayn",
+  "composerProjectName": "kkayn-api",
+  "phpLegacySupport": "false",
+  "variableNamingConvention": "camelCase",
+  "allowUnicodeIdentifiers": "true"
+}

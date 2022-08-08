@@ -1,0 +1,86 @@
+ApiResponse:
+  type: object
+  properties:
+    message:
+      type: string
+
+ApiTokenResponse:
+  type: object
+  properties:
+    message:
+      type: string
+    token:
+      type: string
+
+ApiJsonSchemaResponse:
+  type: object
+  properties:
+    totalErrors:
+      type: 'integer'
+    errors:
+      type: 'array'
+      items:
+        type: 'string'
+    message:
+      type: string
+
+ApiMobileResponse:
+  type: object
+  properties:
+    code:
+      type: string
+    message:
+      type: string
+
+Page:
+  type: object
+  required:
+    - itemsPerPage
+    - offset
+  properties:
+    itemsPerPage:
+      type: 'integer'
+    offset:
+      type: 'integer'
+
+Search:
+  type: object
+  properties:
+    fields:
+      type: 'array'
+      items:
+        type: 'string'
+    values:
+      type: object
+
+Sort:
+  type: object
+  properties:
+    fields:
+      type: 'array'
+      items:
+        type: 'string'
+    values:
+      type: 'array'
+      items:
+        type: 'string'
+
+GroupBy:
+  type: object
+  properties:
+    field:
+      type: 'string'
+
+Filters:
+  type: object
+  properties:
+    searchId:
+      type: 'string'
+    page:
+      $ref: '#/components/schemas/Page'
+    search:
+      $ref: '#/components/schemas/Search'
+    sort:
+      $ref: '#/components/schemas/Sort'
+    groupBy:
+      $ref: '#/components/schemas/GroupBy'

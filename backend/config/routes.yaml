@@ -1,0 +1,9 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+kkayn_api:
+    resource: "@KkaynApiBundle/Resources/config/routing.yml"
+
+api_login_check:
+    path: /login
