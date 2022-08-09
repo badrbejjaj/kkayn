@@ -68,7 +68,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
         if (isset($search)) {
             $operator = "";
             foreach ($search as $searchKey => $searchValue) {
-                if ($search[$searchKey] !== null && !empty($searchValue)) {
+                if ($search[$searchKey] !== null && $searchValue !== "") {
                     if (is_numeric($searchValue)) {
                         // si le type de la valeur recherchée est un numérique (int, float, decimal)... on utilisera le =
                         $operator = '=';
@@ -141,4 +141,15 @@ abstract class AbstractRepository extends ServiceEntityRepository
         return $obj === null || $obj->getId() === $id;
     }
 
+    public function addActiveFilter($qb) {
+        $qb->andWhere($this->queryName . '.active = 1');
+
+        return $qb;
+    }
+
+    public function addLogSuppFilter($qb) {
+        $qb->andWhere($this->queryName . '.logSupp = 0');
+
+        return $qb;
+    }
 }

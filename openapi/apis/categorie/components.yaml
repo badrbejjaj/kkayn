@@ -1,0 +1,25 @@
+Categorie:
+  type: object
+  required:
+  - name
+  properties:
+    id:
+      type: 'integer'
+    name:
+      type: 'string'
+    active:
+      type: 'boolean'
+
+ListCategorieResponse:
+  type: object
+  required:
+  - itemsCount
+  - items
+  properties:
+    itemsCount:
+      type: 'integer'
+      format: 'int64'
+    items:
+      type: 'array'
+      items:
+        $ref: '#/components/schemas/Categorie'

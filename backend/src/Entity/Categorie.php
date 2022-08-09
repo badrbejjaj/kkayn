@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Entity(repositoryClass=CategorieRepository::class)
  */
-class Article  implements LogUserInterface {
-
+class Categorie implements LogUserInterface
+{
     use LogUserTrait;
     use LogDateTrait;
 
@@ -23,53 +23,31 @@ class Article  implements LogUserInterface {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
+    private $name;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : 1})
      */
-    private $active = true;
+    private $active  = true;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : 0})
      */
-    private $logSupp = false;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $readTime;
+    private $logSupp  = false;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    public function setName(string $name): self
     {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
+        $this->name = $name;
 
         return $this;
     }
@@ -94,18 +72,6 @@ class Article  implements LogUserInterface {
     public function setLogSupp(bool $logSupp): self
     {
         $this->logSupp = $logSupp;
-
-        return $this;
-    }
-
-    public function getReadTime(): ?int
-    {
-        return $this->readTime;
-    }
-
-    public function setReadTime(?int $readTime): self
-    {
-        $this->readTime = $readTime;
 
         return $this;
     }

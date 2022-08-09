@@ -90,7 +90,7 @@ abstract class AbstractApi
     {
         $item = $this->repository->find($id);
 
-        if (!isset($item)) {
+        if (!isset($item) || $item->isLogSupp()) {
             $responseCode = Response::HTTP_NOT_FOUND;
             return new ApiResponse(["code" => $responseCode, "message" => "Element not found"]);
         }
