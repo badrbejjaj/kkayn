@@ -1,25 +1,25 @@
 <?php
 namespace App\Api;
 
-use App\Entity\Article;
-use App\Repository\ArticleRepository;
-use KkaynApi\Api\ArticleApiInterface;
+use App\Entity\Categorie;
+use App\Repository\CategorieRepository;
+use KkaynApi\Api\CategorieApiInterface;
 use KkaynApi\Models\ApiResponse;
-use KkaynApi\Models\Article as ArticleModel;
+use KkaynApi\Models\Categorie as CategorieModel;
 use KkaynApi\Models\Filters;
-use KkaynApi\Models\ListArticleResponse;
+use KkaynApi\Models\ListCategorieResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleApi extends AbstractApi implements ArticleApiInterface {
+class CategorieApi extends AbstractApi implements CategorieApiInterface {
 
     public function __construct(
-        ArticleRepository $repository
+        CategorieRepository $repository
     )
     {
         parent::__construct();
 
         $this->repository = $repository;
-        $this->entityName = "Article";
+        $this->entityName = "Categorie";
     }
 
  // Abstract Functions
@@ -27,17 +27,15 @@ class ArticleApi extends AbstractApi implements ArticleApiInterface {
     /**
      * Convert an entity to a model
      *
-     * @param Article $item an entity
+     * @param Categorie $item an entity
      * @return object a model
      */
     protected function entityConvert($item) {
 
-        $model = new ArticleModel();
+        $model = new CategorieModel();
 
         $model->setId($item->getId())
-        ->setTitle($item->getTitle())
-        ->setContent($item->getContent())
-        ->setReadTime($item->getReadTime())
+        ->setName($item->getName())
         ->setActive($item->isActive());
 
         return $model;
@@ -46,15 +44,13 @@ class ArticleApi extends AbstractApi implements ArticleApiInterface {
     /**
      * Convert a model to an entity.
      *
-     * @param ArticleModel $item a model
-     * @param Article $entity an entity
-     * @return Article an entity
+     * @param CategorieModel $item a model
+     * @param Categorie $entity an entity
+     * @return Categorie an entity
      */
     protected function modelConvert($item, $entity) {
         $entity
-            ->setTitle($item->getTitle())
-            ->setContent($item->getContent())
-            ->setReadTime($item->getReadTime())
+            ->setName($item->getName())
             ->setActive($item->isActive() !== null ? $item->isActive() : true);
 
         return $entity;
@@ -80,49 +76,49 @@ class ArticleApi extends AbstractApi implements ArticleApiInterface {
     /**
      * Operation callList
      *
-     * Retourne une liste des articles
+     * Retourne une liste des categories
      *
      * @param  Filters $filters   (required)
      * @param  integer $responseCode     The HTTP response code to return
      * @param  array   $responseHeaders  Additional HTTP headers to return with the response ()
      *
-     * @return KkaynApi\Models\ListArticleResponse
+     * @return KkaynApi\Models\ListCategorieResponse
      *
      */
     public function callList(Filters $filters, &$responseCode, array &$responseHeaders) {
-        return new ListArticleResponse($this->listEntities($filters, $responseCode, $responseHeaders));
+        return new ListCategorieResponse($this->listEntities($filters, $responseCode, $responseHeaders));
     }
 
     /**
      * Operation create
      *
-     * Ajouter un article
+     * Ajouter un categorie
      *
-     * @param  ArticleModel $article   (required)
+     * @param  CategorieModel $categorie   (required)
      * @param  integer $responseCode     The HTTP response code to return
      * @param  array   $responseHeaders  Additional HTTP headers to return with the response ()
      *
      * @return KkaynApi\Models\ApiResponse
      *
      */
-    public function create(ArticleModel $article, &$responseCode, array &$responseHeaders) {
+    public function create(CategorieModel $categorie, &$responseCode, array &$responseHeaders) {
 
-        $articleEntity = new Article();
-        $articleEntity = $this->modelConvert($article, $articleEntity);
+        $categorieEntity = new Categorie();
+        $categorieEntity = $this->modelConvert($categorie, $categorieEntity);
 
-        $this->entityManager->persist($articleEntity);
+        $this->entityManager->persist($categorieEntity);
         $this->entityManager->flush();
 
 
-        return new ApiResponse(['message' => 'New Article Created Successfully']);
+        return new ApiResponse(['message' => 'New Categorie Created Successfully']);
     }
 
     /**
      * Operation delete
      *
-     * Supprime un article
+     * Supprime un categorie
      *
-     * @param  int $id  Id article à supprimer (required)
+     * @param  int $id  Id categorie à supprimer (required)
      * @param  integer $responseCode     The HTTP response code to return
      * @param  array   $responseHeaders  Additional HTTP headers to return with the response ()
      *
@@ -133,44 +129,22 @@ class ArticleApi extends AbstractApi implements ArticleApiInterface {
         return $this->deleteEntity($id, $responseCode, $responseHeaders);
     }
 
-    /**
-     * Operation getById
-     *
-     * Retourne un article
-     *
-     * @param  int $id   (required)
-     * @param  integer $responseCode     The HTTP response code to return
-     * @param  array   $responseHeaders  Additional HTTP headers to return with the response ()
-     *
-     * @return KkaynApi\Models\Article
-     *
-     */
-    public function getById(int $id, &$responseCode, array &$responseHeaders) {
-        $article = $this->repository->find($id);
-
-        if (!$article) {
-            $responseCode = Response::HTTP_NOT_FOUND;
-            return new ApiResponse(['message' => 'Article Not Found']);
-        }
-
-        return $this->entityConvert($article);
-    }
 
     /**
      * Operation update
      *
-     * Met à jour un article
+     * Met à jour un categorie
      *
-     * @param  int $id  id article à mettre à jour (required)
-     * @param  KkaynApi\Models\Article $article   (required)
+     * @param  int $id  id categorie à mettre à jour (required)
+     * @param  KkaynApi\Models\Categorie $categorie   (required)
      * @param  integer $responseCode     The HTTP response code to return
      * @param  array   $responseHeaders  Additional HTTP headers to return with the response ()
      *
      * @return KkaynApi\Models\ApiResponse
      *
      */
-    public function update(int $id, ArticleModel $article, &$responseCode, array &$responseHeaders) {
-        return $this->updateEntity($id, $article, $responseCode, $responseHeaders);
+    public function update(int $id, CategorieModel $categorie, &$responseCode, array &$responseHeaders) {
+        return $this->updateEntity($id, $categorie, $responseCode, $responseHeaders);
     }
 
 }

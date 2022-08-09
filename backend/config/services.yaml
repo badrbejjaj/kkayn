@@ -45,3 +45,8 @@ services:
         class: App\Api\ArticleApi
         tags:
             - { name: "kkayn_api.api", api: "article" }
+
+    app.api.categorie:
+        class: App\Api\CategorieApi
+        tags:
+            - { name: "kkayn_api.api", api: "categorie" }

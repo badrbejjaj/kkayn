@@ -1,0 +1,132 @@
+/categories:
+  post:
+    tags:
+    - 'categorie'
+    summary: 'Retourne une liste des categories'
+    description: ''
+    operationId: 'list'
+    security:
+      - oAuth:
+        - "categorie:read"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Filters'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCategorieResponse'
+
+/categorie/{id}:
+  get:
+    tags:
+    - 'categorie'
+    summary: 'Retourne un categorie'
+    description: ''
+    operationId: 'getById'
+    security:
+      - oAuth:
+        - "categorie:read"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categorie'
+      400:
+        description: 'Identifiant categories'
+      404:
+        description: 'categorie non trouvé'
+  put:
+    tags:
+    - 'categorie'
+    summary: 'Met à jour un categorie'
+    description: 'MaJ categorie'
+    operationId: 'update'
+    security:
+      - oAuth:
+        - "categorie:edit"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'id categorie à mettre à jour'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Categorie'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'categorie non trouvé'
+  delete:
+    tags:
+    - 'categorie'
+    summary: 'Supprime un categorie'
+    description: 'Suppression categorie'
+    operationId: 'delete'
+    security:
+      - oAuth:
+        - "categorie:delete"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'Id categorie à supprimer'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'categorie non trouvé'
+
+
+/categorie:
+  post:
+    tags:
+    - 'categorie'
+    summary: 'Ajouter un categorie'
+    description: ''
+    operationId: 'create'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Categorie'
+      required: true
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
