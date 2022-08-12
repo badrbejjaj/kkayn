@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# https://git-scm.com/docs/githooks#_commit_msg
+# $1 : the name of the file that holds the proposed commit log message
+
+set -e
+
+commitlint --config commitlint.config.js --edit "$1"
