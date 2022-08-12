@@ -1,0 +1,29 @@
+Vocabulary:
+  type: object
+  required:
+  - name
+  properties:
+    id:
+      type: 'integer'
+    name:
+      type: 'string'
+    title:
+      type: 'string'
+    description:
+      type: 'string'
+    active:
+      type: 'boolean'
+
+ListVocabularyResponse:
+  type: object
+  required:
+  - itemsCount
+  - items
+  properties:
+    itemsCount:
+      type: 'integer'
+      format: 'int64'
+    items:
+      type: 'array'
+      items:
+        $ref: '#/components/schemas/Vocabulary'
