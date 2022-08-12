@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# https://git-scm.com/docs/githooks#_post_checkout
+# $1 : ref of the previous HEAD
+# $2 : ref of the new HEAD
+# $3 : checkout flag (1 = changing branches, 0 = retrieving file from index)
+
+# Mise à jour des apis lors du checkout
+if [ "$3" -eq "1" ] && [ "$1" != "$2" ]; then
+  echo "Build Apis"
+  makeapi -O --skip-validate-spec
+fi
