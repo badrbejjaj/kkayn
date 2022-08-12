@@ -50,3 +50,8 @@ services:
         class: App\Api\CategorieApi
         tags:
             - { name: "kkayn_api.api", api: "categorie" }
+
+    app.api.vocabulary:
+        class: App\Api\VocabularyApi
+        tags:
+            - { name: "kkayn_api.api", api: "vocabulary" }

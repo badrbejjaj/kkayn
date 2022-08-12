@@ -1,0 +1,132 @@
+/vocabularies:
+  post:
+    tags:
+    - 'vocabulary'
+    summary: 'Retourne une liste des vocabulaires'
+    description: ''
+    operationId: 'list'
+    security:
+      - oAuth:
+        - "vocabulary:read"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Filters'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListVocabularyResponse'
+
+/vocabulary/{id}:
+  get:
+    tags:
+    - 'vocabulary'
+    summary: 'Retourne un vocabulary'
+    description: ''
+    operationId: 'getById'
+    security:
+      - oAuth:
+        - "vocabulary:read"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vocabulary'
+      400:
+        description: 'Identifiant vocabulaires'
+      404:
+        description: 'vocabulary non trouvé'
+  put:
+    tags:
+    - 'vocabulary'
+    summary: 'Met à jour un vocabulary'
+    description: 'MaJ vocabulary'
+    operationId: 'update'
+    security:
+      - oAuth:
+        - "vocabulary:edit"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'id vocabulary à mettre à jour'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Vocabulary'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'vocabulary non trouvé'
+  delete:
+    tags:
+    - 'vocabulary'
+    summary: 'Supprime un vocabulary'
+    description: 'Suppression vocabulary'
+    operationId: 'delete'
+    security:
+      - oAuth:
+        - "vocabulary:delete"
+    parameters:
+    - name: 'id'
+      in: 'path'
+      description: 'Id vocabulary à supprimer'
+      required: true
+      schema:
+        type: 'integer'
+        format: 'int64'
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
+      404:
+        description: 'vocabulary non trouvé'
+
+
+/vocabulary:
+  post:
+    tags:
+    - 'vocabulary'
+    summary: 'Ajouter un vocabulary'
+    description: ''
+    operationId: 'create'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Vocabulary'
+      required: true
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiResponse'
