@@ -1,1 +1,107 @@
+
+
+
+// THIS --> https://material.io/design/color/#tools-for-picking-colors
+// https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=fa8242
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+
+$md-univerpaletteygreen: (
+    50 : #e0efed,
+    100 : #b3d7d3,
+    200 : #80bcb5,
+    300 : #4da197,
+    400 : #268d81,
+    500 : #00796b,
+    600 : #007163,
+    700 : #006658,
+    800 : #005c4e,
+    900 : #00493c,
+    A100 : #7dffe1,
+    A200 : #4affd6,
+    A400 : #17ffca,
+    A700 : #00fcc3,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-univerpaletteyellow: (
+    50 : #fff8e1,
+    100 : #ffecb5,
+    200 : #ffe083,
+    300 : #ffd451,
+    400 : #ffca2c,
+    500 : #ffc107,
+    600 : #ffbb06,
+    700 : #ffb305,
+    800 : #ffab04,
+    900 : #ff9e02,
+    A100 : #ffffff,
+    A200 : #fffaf2,
+    A400 : #ffe4bf,
+    A700 : #ffd9a6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$univer-primary: mat-palette($md-univerpaletteygreen);
+$univer-accent: mat-palette($md-univerpaletteyellow);
+$univer-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$univer-theme: mat-light-theme($univer-primary, $univer-accent, $univer-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($univer-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+
+
+html, body { height: 100%; }
+body { margin: 0  }
+a {
+    color: white;
+    text-decoration: none;
+}

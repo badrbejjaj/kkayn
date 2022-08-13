@@ -1,0 +1,28 @@
+<h3>Sign In</h3>
+
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput formControlName="username" type="text" placeholder="Username" autocomplete="off" />
+
+        <mat-error *ngIf="username.invalid && username.dirty">
+          You must enter a valid username
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" placeholder="Password" autocomplete="off" />
+
+        <mat-error *ngIf="password.invalid && password.dirty">
+          Password must be at least 6 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid || loading" *ngIf="!loading">
+        Submit
+      </button>
+      <mat-spinner class="login-loader" *ngIf="loading" diameter="36"></mat-spinner>
+    </form>
+  </mat-card>
+
+</div>
