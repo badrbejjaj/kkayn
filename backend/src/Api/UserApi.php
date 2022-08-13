@@ -44,6 +44,7 @@ class UserApi extends AbstractApi implements UserApiInterface {
         $model->setId($item->getId())
         ->setFirstName($item->getFirstName())
         ->setLastName($item->getLastName())
+        ->setUsername($item->getUsername())
         ->setUpdateDate($item->getUpdatedAt()->format("d/m/Y H:i:s"))
         ->setCreationDate($item->getCreatedAt()->format("d/m/Y H:i:s"));
 
@@ -245,6 +246,25 @@ class UserApi extends AbstractApi implements UserApiInterface {
         $token = $this->createNewToken($userEntity);
 
         return new ApiTokenResponse(['message' => 'Inscription réussie', 'token' => $token]);
+    }
+
+    /**
+     * Operation getCurrentUser
+     *
+     * retourn l'utilisateur connecté.
+     * @param  integer $responseCode     The HTTP response code to return
+     * @param  array   $responseHeaders  Additional HTTP headers to return with the response ()
+     *
+     * @return FsjesApi\Models\User[]
+     *
+     */
+    public function getCurrentUser(&$responseCode, array &$responseHeaders) {
+        $user = $this->getLoggedInUser();
+        if(!$user) {
+            throw new \Exception("No currrent user logged in");
+        }
+
+        return $this->entityConvert($user);
     }
 
     private function hashPassword($user, $password) {

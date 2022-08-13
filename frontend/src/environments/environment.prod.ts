@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiAccessPoint: 'https://api-kkayn.herokuapp.com'
 };

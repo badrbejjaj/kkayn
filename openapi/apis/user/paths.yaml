@@ -149,3 +149,25 @@
               $ref: '#/components/schemas/ApiTokenResponse'
       422:
         description: 'Username or email already exist'
+
+/user/current:
+  get:
+    tags:
+    - 'user'
+    summary: "Retourn l'utilisateur courant"
+    description: ''
+    operationId: 'getCurrentUser'
+    security:
+      - oAuth:
+        - "user:read"
+    responses:
+      200:
+        description: 'successful operation'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      400:
+        description: 'Aucun utilisateur connecté'
+      422:
+        description: 'Utilisateur non trouvé'
