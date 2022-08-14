@@ -45,6 +45,7 @@ class UserApi extends AbstractApi implements UserApiInterface {
         ->setFirstName($item->getFirstName())
         ->setLastName($item->getLastName())
         ->setUsername($item->getUsername())
+        ->setEmail($item->getEmail())
         ->setUpdateDate($item->getUpdatedAt()->format("d/m/Y H:i:s"))
         ->setCreationDate($item->getCreatedAt()->format("d/m/Y H:i:s"));
 
