@@ -21,4 +21,8 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  signout(): void {
+
+  }
+
 }
