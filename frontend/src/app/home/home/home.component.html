@@ -1,10 +1,18 @@
-<div class="container" style="height: 80vh; display: flex; align-items: center; align-content: center; flex-direction: column;justify-content: center;">
+<div class="container" >
     <h1>Successfuly Logged As :</h1>
-    <mat-card >
-        <p>Username : <strong>{{ currentUser.username }} </strong></p>
-        <p>LastName :  <strong>{{ currentUser.lastName }}</strong> </p>
-        <p>LastName :  <strong>{{ currentUser.lastName }}</strong> </p>
+
+    <mat-card class="mat-card-user-info" >
+        <p>Email : <strong>{{ currentUser.email }} </strong></p>
+        <p>LastName : <strong>{{ currentUser.lastName }}</strong> </p>
+        <p>LastName : <strong>{{ currentUser.lastName }}</strong> </p>
         <p>CreationDate : {{ currentUser.creationDate }} </p>
         <p>UpdateDate : {{ currentUser.updateDate }} </p>
+
+        <button style="margin-top: 20px;" mat-raised-button color="accent" (click)="currentUserService.logout()">
+            <i>🏃‍♂️</i>
+            <span>Logout</span>
+        </button>
     </mat-card>
+
+   
 </div>
