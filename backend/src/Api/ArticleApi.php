@@ -3,6 +3,7 @@ namespace App\Api;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use KkaynApi\Api\ArticleApiInterface;
 use KkaynApi\Models\ApiResponse;
 use KkaynApi\Models\Article as ArticleModel;
@@ -13,13 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
 class ArticleApi extends AbstractApi implements ArticleApiInterface {
 
     public function __construct(
-        ArticleRepository $repository
+        ArticleRepository $repository,
+        CategorieRepository $categorieRepo
     )
     {
         parent::__construct();
 
         $this->repository = $repository;
         $this->entityName = "Article";
+        $this->categorieRepo = $categorieRepo;
     }
 
  // Abstract Functions
@@ -40,6 +43,11 @@ class ArticleApi extends AbstractApi implements ArticleApiInterface {
         ->setReadTime($item->getReadTime())
         ->setActive($item->isActive());
 
+        if ($item->getCategorie()) {
+            $categorieModel = CategorieApi::entityStaticConvert($item->getCategorie());
+            $model->setCategorie($categorieModel);
+        }
+
         return $model;
     }
 
@@ -56,6 +64,11 @@ class ArticleApi extends AbstractApi implements ArticleApiInterface {
             ->setContent($item->getContent())
             ->setReadTime($item->getReadTime())
             ->setActive($item->isActive() !== null ? $item->isActive() : true);
+
+        if ($item->getCategorie()) {
+            $categorieId = $item->getCategorie()->getId();
+            $entity->setCategorie($categorieId ? $this->categorieRepo->find($categorieId) : null);
+        }
 
         return $entity;
     }

@@ -45,6 +45,11 @@ class Article  implements LogUserInterface {
      */
     private $readTime;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="articles")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class Article  implements LogUserInterface {
     public function setReadTime(?int $readTime): self
     {
         $this->readTime = $readTime;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

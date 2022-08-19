@@ -1,1 +1,1 @@
-makeapi -O --skip-validate-spec
+makemyapi -O --skip-validate-spec
