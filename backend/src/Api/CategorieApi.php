@@ -41,6 +41,17 @@ class CategorieApi extends AbstractApi implements CategorieApiInterface {
         return $model;
     }
 
+    public  static function entityStaticConvert($item) {
+
+        $model = new CategorieModel();
+
+        $model->setId($item->getId())
+        ->setName($item->getName())
+        ->setActive($item->isActive());
+
+        return $model;
+    }
+
     /**
      * Convert a model to an entity.
      *
@@ -126,6 +137,14 @@ class CategorieApi extends AbstractApi implements CategorieApiInterface {
      *
      */
     public function delete(int $id, &$responseCode, array &$responseHeaders) {
+        $categorie = $this->repository->find($id);
+
+        /** @var Categorie $categorie */
+        if (!$categorie->isRemovable()) {
+            $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+            return new ApiResponse(["message" => "La categorie ne peut pas être supprimée."]);
+        }
+
         return $this->deleteEntity($id, $responseCode, $responseHeaders);
     }
 

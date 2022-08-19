@@ -7,7 +7,7 @@ sh update-tools.sh
 
 echo "Configuration de l'environnement frontend local"
 
-cd frontend/src/src/environments/
+cd frontend/src/environments/
 
 cp -f environment.local.ts environment.ts
 
@@ -27,4 +27,4 @@ git config core.hooksPath .githooks
 
 echo "Génération des APIs"
 
-makeapi --sourcesPath src/ -O --skip-validate-spec
+makemyapi --sourcesPath src/ -O --skip-validate-spec

@@ -8,5 +8,5 @@
 # Mise à jour des apis lors du checkout
 if [ "$3" -eq "1" ] && [ "$1" != "$2" ]; then
   echo "Build Apis"
-  makeapi -O --skip-validate-spec
+  sh makeapi.sh
 fi
