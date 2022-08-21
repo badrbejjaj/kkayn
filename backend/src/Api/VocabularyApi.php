@@ -2,6 +2,7 @@
 namespace App\Api;
 
 use App\Entity\Vocabulary;
+use App\Repository\CategorieRepository;
 use App\Repository\VocabularyRepository;
 use KkaynApi\Api\VocabularyApiInterface;
 use KkaynApi\Models\ApiResponse;
@@ -13,13 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
 class VocabularyApi extends AbstractApi implements VocabularyApiInterface {
 
     public function __construct(
-        VocabularyRepository $repository
+        VocabularyRepository $repository,
+        CategorieRepository $categorieRepo
     )
     {
         parent::__construct();
 
         $this->repository = $repository;
         $this->entityName = "Vocabulary";
+        $this->categorieRepo = $categorieRepo;
     }
 
  // Abstract Functions
@@ -40,6 +43,11 @@ class VocabularyApi extends AbstractApi implements VocabularyApiInterface {
         ->setDescription($item->getDescription())
         ->setActive($item->isActive());
 
+        if ($item->getCategorie()) {
+            $categorieModel = CategorieApi::entityStaticConvert($item->getCategorie());
+            $model->setCategorie($categorieModel);
+        }
+
         return $model;
     }
 
@@ -57,6 +65,11 @@ class VocabularyApi extends AbstractApi implements VocabularyApiInterface {
             ->setDescription($item->getDescription())
             ->setActive($item->isActive() !== null ? $item->isActive() : true);
 
+            if ($item->getCategorie()) {
+                $categorieId = $item->getCategorie()->getId();
+                $entity->setCategorie($categorieId ? $this->categorieRepo->find($categorieId) : null);
+            }
+    
         return $entity;
     }
 

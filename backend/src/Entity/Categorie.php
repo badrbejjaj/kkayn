@@ -55,9 +55,15 @@ class Categorie implements LogUserInterface
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Vocabulary::class, mappedBy="categorie")
+     */
+    private $vocabularies;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->vocabularies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +158,36 @@ class Categorie implements LogUserInterface
     public function setType(int $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vocabulary>
+     */
+    public function getVocabularies(): Collection
+    {
+        return $this->vocabularies;
+    }
+
+    public function addVocabulary(Vocabulary $vocabulary): self
+    {
+        if (!$this->vocabularies->contains($vocabulary)) {
+            $this->vocabularies[] = $vocabulary;
+            $vocabulary->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVocabulary(Vocabulary $vocabulary): self
+    {
+        if ($this->vocabularies->removeElement($vocabulary)) {
+            // set the owning side to null (unless already changed)
+            if ($vocabulary->getCategorie() === $this) {
+                $vocabulary->setCategorie(null);
+            }
+        }
 
         return $this;
     }

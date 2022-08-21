@@ -46,6 +46,11 @@ class Vocabulary implements LogUserInterface
      */
     private $logSupp = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="vocabularies")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Vocabulary implements LogUserInterface
     public function setLogSupp(bool $logSupp): self
     {
         $this->logSupp = $logSupp;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
