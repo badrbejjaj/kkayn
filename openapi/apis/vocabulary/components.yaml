@@ -11,6 +11,8 @@ Vocabulary:
       type: 'string'
     description:
       type: 'string'
+    categorie:
+        $ref: '#/components/schemas/Categorie'
     active:
       type: 'boolean'
 
