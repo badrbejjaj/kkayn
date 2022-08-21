@@ -12,6 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie implements LogUserInterface
 {
+
+    CONST ARTICLE_TYPE = 1;
+    CONST VOCABULARY_TYPE = 2;
+    CONST TYPES_LIST = [
+        self::ARTICLE_TYPE,
+        self::VOCABULARY_TYPE
+    ];
+
     use LogUserTrait;
     use LogDateTrait;
 
@@ -41,6 +49,11 @@ class Categorie implements LogUserInterface
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="categorie")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $type;
 
     public function __construct()
     {
@@ -129,5 +142,17 @@ class Categorie implements LogUserInterface
         }
 
         return true;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }
