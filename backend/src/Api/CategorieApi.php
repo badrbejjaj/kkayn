@@ -36,6 +36,7 @@ class CategorieApi extends AbstractApi implements CategorieApiInterface {
 
         $model->setId($item->getId())
         ->setName($item->getName())
+        ->setType($item->getType())
         ->setActive($item->isActive());
 
         return $model;
@@ -63,6 +64,10 @@ class CategorieApi extends AbstractApi implements CategorieApiInterface {
         $entity
             ->setName($item->getName())
             ->setActive($item->isActive() !== null ? $item->isActive() : true);
+
+        if (in_array($item->getType(), Categorie::TYPES_LIST)) {
+            $entity->setType($item->getType());
+        }
 
         return $entity;
     }
