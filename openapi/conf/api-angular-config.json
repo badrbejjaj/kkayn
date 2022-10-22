@@ -3,6 +3,6 @@
   "npmVersion": "1.0",
   "snapshot": "false",
   "providedInRoot": "true",
-  "ngVersion": "12.2.16",
+  "ngVersion": "14.0.5",
   "supportsES6": "true"
 }
