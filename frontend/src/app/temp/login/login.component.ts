@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CurrentUserService } from '@shared/services/currentuser.service';
 
@@ -10,13 +10,13 @@ import { CurrentUserService } from '@shared/services/currentuser.service';
 })
 export class LoginComponent {
   @Output() isLoading: EventEmitter<boolean> = new EventEmitter();
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public loading = false;
 
   constructor(
     private currentUserService: CurrentUserService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.form =  this.fb.group({
       username: ['', [Validators.required]],
