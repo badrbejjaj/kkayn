@@ -19,7 +19,7 @@ export class OAuthGaurd implements CanActivate {
         return this.currentUserService.isAuthenticated()
             .pipe(tap((logged) => {
                 if (!logged) {
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/sing-in']);
                     return false;
                 }
 

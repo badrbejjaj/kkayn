@@ -3,11 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [],
-    "paths": {
-      "@api/*" : ["KkaynClientAPI/*"],
-      "@shared/*" : ["src/app/shared/*"]
-    }
+    "types": []
   },
   "files": [
     "src/main.ts",

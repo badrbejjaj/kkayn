@@ -18,8 +18,10 @@
       "dom"
     ],
     "paths": {
-      "@api/*" : ["KkaynClientAPI/*"],
-      "@shared/*" : ["src/app/shared/*"]
+      "@api/*" : ["../KkaynClientAPI/*"],
+      "@shared/*" : ["app/shared/*"],
+      "@layout/*" : ["app/layout/*"],
+      "@core/*" : ["app/core/*"]
     }
   },
   "angularCompilerOptions": {
