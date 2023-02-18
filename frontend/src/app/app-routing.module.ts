@@ -30,6 +30,8 @@ const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate: [NoAuthGuard],
+        canActivateChild: [NoAuthGuard],
         data: {
             layout: 'empty',
         },
@@ -76,6 +78,8 @@ const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate: [NoAuthGuard],
+        canActivateChild: [NoAuthGuard],
         data: {
             layout: 'empty',
         },
@@ -118,6 +122,8 @@ const routes: Routes = [
     // Admin routes
     {
         path: '',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         component: LayoutComponent,
         resolve: {
             initialData: InitialDataResolver,

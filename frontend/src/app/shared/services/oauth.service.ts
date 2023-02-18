@@ -1,7 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LocalStorageService } from './localStorageService.service';
 import { environment } from 'environments/environment';
@@ -44,6 +44,10 @@ export class OauthService {
 
   public isLogged(): boolean {
     return this.getOAuthData() && !this.isTokenExpired();
+  }
+
+  public isLogged$(): Observable<boolean> {
+    return of(this.isLogged());
   }
 
   protected getOAuthData(): OAuthData | null {
