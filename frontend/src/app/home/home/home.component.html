@@ -1,7 +1,7 @@
 <div class="container" >
     <h1>Successfuly Logged As :</h1>
 
-    <mat-card class="mat-card-user-info" >
+    <mat-card class="mat-card-user-info" *ngIf="currentUser">
         <p>Email : <strong>{{ currentUser.email }} </strong></p>
         <p>LastName : <strong>{{ currentUser.lastName }}</strong> </p>
         <p>LastName : <strong>{{ currentUser.lastName }}</strong> </p>

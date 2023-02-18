@@ -9,13 +9,13 @@ import { OAuthData, SignUpCredentials } from '@shared/Interfaces';
     providedIn: 'root'
 })
 export class CurrentUserService {
+    retrieving = false;
     // tslint:disable-next-line: variable-name
     private readonly _userSubject = new ReplaySubject<User>(1);
     // tslint:disable-next-line: variable-name
     private _user: User;
     // tslint:disable-next-line: variable-name
     private _userSubscription: Subscription;
-    public retrieving = false;
 
     public constructor(
         private oAuthService: OauthService,
@@ -30,10 +30,12 @@ export class CurrentUserService {
     }
 
     public redirectToLogin(): void {
-        this.router.navigate(['/login']);
+
+        // this.router.navigate(['/example']);
     }
 
-    public isAuthenticated(): Observable<boolean> {
+    public isAuthenticated(isAuth = 'nada'): Observable<boolean> {
+        console.log(isAuth);
         return combineLatest([
           of(this.oAuthService.isLogged()),
           this.currentUser$.pipe(map((u: User) => u !== undefined ))

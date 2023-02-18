@@ -9,6 +9,8 @@ import { CurrentUserService } from '@shared/services/currentuser.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
+
   @Output() isLoading: EventEmitter<boolean> = new EventEmitter();
   public form: UntypedFormGroup;
   public loading = false;
@@ -25,27 +27,30 @@ export class LoginComponent {
 
   }
 
-  onSubmit(): void {
-    this.Onloading(true);
-    if (this.form.valid) {
-      this.currentUserService.login(this.form.value).subscribe( (response) => {
-        this.router.navigate(['/']);
-        this.Onloading(true);
-      }, (error) => {
-        console.log(error.message);
-        this.Onloading(false);
-      });
-    }
-  }
-
   get username(): AbstractControl {
     return this.form.get('username');
   }
   get password(): AbstractControl {
     return this.form.get('password');
   }
-  Onloading(event): void {
+
+  onloading(event): void {
     this.loading = event;
     this.isLoading.emit(event);
   }
+
+  onSubmit(): void {
+    this.onloading(true);
+    if (this.form.valid) {
+      this.currentUserService.login(this.form.value).subscribe( (response) => {
+        this.router.navigate(['/']);
+        this.onloading(true);
+      }, (error) => {
+        console.log(error.message);
+        this.onloading(false);
+      });
+    }
+  }
+
+
 }
