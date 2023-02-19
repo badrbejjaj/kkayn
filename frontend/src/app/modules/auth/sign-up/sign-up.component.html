@@ -33,15 +33,39 @@
                 [formGroup]="signUpForm"
                 #signUpNgForm="ngForm">
 
-                <!-- Name field -->
-                <mat-form-field class="w-full">
-                    <mat-label>Full name</mat-label>
+                <!-- Firstname field -->
+                <mat-form-field class="w-1/2 pr-2">
+                    <mat-label>Firstname</mat-label>
                     <input
-                        id="name"
+                        id="firstName"
                         matInput
-                        [formControlName]="'name'">
-                    <mat-error *ngIf="signUpForm.get('name').hasError('required')">
-                        Full name is required
+                        [formControlName]="'firstName'">
+                    <mat-error *ngIf="signUpForm.get('firstName').hasError('required')">
+                        Firstname is required
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- LastName field -->
+                <mat-form-field class="w-1/2">
+                    <mat-label>Lastname</mat-label>
+                    <input
+                        id="lastName"
+                        matInput
+                        [formControlName]="'lastName'">
+                    <mat-error *ngIf="signUpForm.get('lastName').hasError('required')">
+                        Lastname is required
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Username field -->
+                <mat-form-field class="w-full">
+                    <mat-label>Username</mat-label>
+                    <input
+                        id="username"
+                        matInput
+                        [formControlName]="'username'">
+                    <mat-error *ngIf="signUpForm.get('username').hasError('required')">
+                        Username is required
                     </mat-error>
                 </mat-form-field>
 
@@ -86,15 +110,6 @@
                     <mat-error>
                         Password is required
                     </mat-error>
-                </mat-form-field>
-
-                <!-- Company field -->
-                <mat-form-field class="w-full">
-                    <mat-label>Company</mat-label>
-                    <input
-                        id="company-confirm"
-                        matInput
-                        [formControlName]="'company'">
                 </mat-form-field>
 
                 <!-- ToS and PP -->
