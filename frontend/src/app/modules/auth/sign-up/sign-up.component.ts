@@ -3,7 +3,8 @@ import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angul
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/core/auth/auth.service';
+import { SignUpCredentials } from '@shared/Interfaces';
+import { CurrentUserService } from '@shared/services/currentuser.service';
 
 @Component({
     selector     : 'auth-sign-up',
@@ -26,7 +27,7 @@ export class AuthSignUpComponent implements OnInit
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
+        private _currentUserService: CurrentUserService,
         private _formBuilder: UntypedFormBuilder,
         private _router: Router
     )
@@ -44,10 +45,11 @@ export class AuthSignUpComponent implements OnInit
     {
         // Create the form
         this.signUpForm = this._formBuilder.group({
-                name      : ['', Validators.required],
+                username      : ['', Validators.required],
+                firstName      : ['', Validators.required],
+                lastName      : ['', Validators.required],
                 email     : ['', [Validators.required, Validators.email]],
                 password  : ['', Validators.required],
-                company   : [''],
                 agreements: ['', Validators.requiredTrue]
             }
         );
@@ -75,15 +77,13 @@ export class AuthSignUpComponent implements OnInit
         this.showAlert = false;
 
         // Sign up
-        this._authService.signUp(this.signUpForm.value)
-            .subscribe(
-                (response) => {
-
-                    // Navigate to the confirmation required page
+        // this._authService.signUp(this.signUpForm.value)
+        this._currentUserService.signUpUser(this.signUpForm.value)
+            .subscribe({
+                next: (response) => {
                     this._router.navigateByUrl('/confirmation-required');
                 },
-                (response) => {
-
+                error(err) {
                     // Re-enable the form
                     this.signUpForm.enable();
 
@@ -93,12 +93,13 @@ export class AuthSignUpComponent implements OnInit
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Something went wrong, please try again.'
+                        message: `Something went wrong, please try again. (${err})`
                     };
 
                     // Show the alert
                     this.showAlert = true;
-                }
+                },
+            }
             );
     }
 }
